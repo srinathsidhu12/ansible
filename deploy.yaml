@@ -1,0 +1,34 @@
+---
+ - name: Install and configure apache web server
+   hosts: Slaves
+   become: yes
+   vars:
+     package: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            63613961326338633065343935383631373031316463633431663136356661393433653038623233
+            3334356464656336326665656430303835646330376239650a393138323163386361636466373536
+            39373332373433626463326665333066643933613065623133386331303134616264303232393933
+            6131376135373431340a363031383462663233376433623765383533323336363538316230366565
+            3762
+   
+   tasks:
+   - name: Install "{{ package }}"
+     apt:
+       name: "{{ package }}"
+       state: present
+   - name: Starting "{{ package }}" service
+     service:
+       name: "{{ package }}"
+       state: started
+   - name: Deploy sample index.html
+     copy: 
+      dest: /var/www/html/index.html
+      content: |
+          <html>
+          <head><title>Welcome</title></head>
+          <body>
+            <h1>Hello from Ansible Web Server!</h1>
+          </body>
+          </html>
+  
+
