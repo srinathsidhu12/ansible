@@ -1,0 +1,25 @@
+---
+ - name: Install and configure apache web server
+   hosts: Slaves
+   become: yes
+   tasks:
+   - name: Install apache2
+     apt:
+       name: apache2
+       state: present
+   - name: Starting apache2 service
+     service:
+       name: apache2
+       state: started
+   - name: Deploy sample index.html
+     copy: 
+      dest: /var/www/html/index.html
+      content: |
+          <html>
+          <head><title>Welcome</title></head>
+          <body>
+            <h1>Hello from Ansible Web Server!</h1>
+          </body>
+          </html>
+  
+
