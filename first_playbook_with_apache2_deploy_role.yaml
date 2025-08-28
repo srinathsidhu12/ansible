@@ -1,0 +1,5 @@
+---
+- hosts: Slave1
+  become: true
+  roles:
+   - ../apache2_deploy_role 

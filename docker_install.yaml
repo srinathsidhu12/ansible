@@ -1,0 +1,5 @@
+---
+ - hosts: Slave1
+   become: yes
+   roles:
+    - bsmeding.docker

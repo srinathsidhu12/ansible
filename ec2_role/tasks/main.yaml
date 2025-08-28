@@ -1,0 +1,14 @@
+---
+- name: Creating an ec2_instance
+  amazon.aws.ec2_instance:
+    name: "{{instance_name}}"
+    key_name: "{{key}}"
+    vpc_subnet_id: "{{subnet}}"
+    instance_type: "{{type}}"
+    security_group: "{{sg_group}}"
+    image_id: "{{ami_id}}"
+    aws_access_key: "{{aws_access_key}}"
+    aws_secret_key: "{{aws_secret_key}}"
+    region: "{{region}}"
+
+
