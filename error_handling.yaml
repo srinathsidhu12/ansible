@@ -1,0 +1,28 @@
+---
+ - hosts: Slave1
+   become: true
+   tasks:
+   - name: Checking openssl and openssh packages
+     ansible.builtin.apt:
+       name: "{{item}}"
+       state: latest
+     loop:
+       - openssl
+       - openssh
+     ignore_errors: yes
+   - name: checking if docker is available
+     ansible.builtin.command: docker --version
+     register: output_checking_docker_version
+     ignore_errors: yes
+   - name: printing the version checked output
+     ansible.builtin.debug:
+       var: output_checking_docker_version
+   - name: Installing docker
+     ansible.builtin.apt:
+       name: docker.io
+       state: present
+     when:
+       output_checking_docker_version.failed
+
+
+
