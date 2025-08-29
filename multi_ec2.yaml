@@ -1,0 +1,68 @@
+---
+ - hosts: local
+   connection: local
+   vars_files:
+    - aws_cred.yaml
+   tasks:
+   - name: Create EC2 instances
+     amazon.aws.ec2_instance:
+       name: "{{ item.name }}"
+       instance_type: t2.micro
+       image_id: "{{ item.image }}"
+       security_group: new_sg
+       key_name: sample
+       region: ap-south-1
+       aws_access_key: "{{aws_access_key}}"
+       aws_secret_key: "{{aws_secret_key}}"
+       network:
+         assign_public_ip: true
+       tags:
+         environment: "{{ item.name }}"
+     loop:
+       - { image: "ami-0861f4e788f5069dd", name: "manage_node_1" }
+       - { image: "ami-02d26659fd82cf299", name: "manage_node_2" }
+       - { image: "ami-02d26659fd82cf299", name: "manage_node_3" }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
+
