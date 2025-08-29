@@ -1,0 +1,10 @@
+---
+- name: Install Apache on Dev Servers
+  hosts: dev
+  become: yes
+  tasks:
+    - name: Install Apache
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+
